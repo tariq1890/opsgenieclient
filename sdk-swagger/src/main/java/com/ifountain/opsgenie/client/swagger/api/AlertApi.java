@@ -17,8 +17,8 @@ import com.ifountain.opsgenie.client.swagger.ApiException;
 import com.ifountain.opsgenie.client.swagger.Configuration;
 import com.ifountain.opsgenie.client.swagger.Pair;
 import com.ifountain.opsgenie.client.swagger.model.*;
-import com.sun.jersey.api.client.GenericType;
 
+import javax.ws.rs.core.GenericType;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
