@@ -18,6 +18,7 @@ public class OpsGenieClientMock implements IOpsGenieClient {
     private ClientConfiguration clientConfiguration;
     private InnerUserOpsGenieClientMock userOpsGenieClientMock = new InnerUserOpsGenieClientMock(requestProcessor);
     private InnerAlertOpsGenieClientMock alertOpsGenieClientMock = new InnerAlertOpsGenieClientMock(requestProcessor);
+    private InnerAlertV2OpsGenieClientMock alertV2OpsGenieClientMock = new InnerAlertV2OpsGenieClientMock(requestProcessor);
     private InnerEscalationOpsGenieClientMock escalationOpsGenieClientMock = new InnerEscalationOpsGenieClientMock(requestProcessor);
     private InnerGroupOpsGenieClientMock groupOpsGenieClientMock = new InnerGroupOpsGenieClientMock(requestProcessor);
     private InnerScheduleOpsGenieClientMock scheduleOpsGenieClientMock = new InnerScheduleOpsGenieClientMock(requestProcessor);
@@ -33,6 +34,7 @@ public class OpsGenieClientMock implements IOpsGenieClient {
     private EnableHeartbeatResponse enableHeartbeatResponse;
     private CopyNotificationRulesResponse copyNotificationRulesResponse;
     private HeartbeatPingResponse heartbeatPingResponse;
+    private AddAlertAttachmentResponse addAlertAttachmentResponse;
 
     /**
      * @see com.ifountain.opsgenie.client.IOpsGenieClient#contact()
@@ -66,6 +68,11 @@ public class OpsGenieClientMock implements IOpsGenieClient {
     @Override
     public IAlertOpsGenieClient alert() {
         return alertOpsGenieClientMock;
+    }
+
+    @Override
+    public InnerAlertV2OpsGenieClientMock alertV2() {
+        return alertV2OpsGenieClientMock;
     }
 
     @Override
@@ -108,6 +115,12 @@ public class OpsGenieClientMock implements IOpsGenieClient {
     HeartbeatPingResponse pingHeartbeat(HeartbeatPingRequest heartbeatRequest) throws ParseException, OpsGenieClientException, IOException {
         requestProcessor.processRequest(heartbeatRequest);
         return heartbeatPingResponse;
+    }
+
+    @Override
+    AddAlertAttachmentResponse addAlertAttachment(AddAlertAttachmentRequest addAlertAttachmentRequest) throws ParseException, OpsGenieClientException, IOException {
+        requestProcessor.processRequest(addAlertAttachmentRequest)
+        this.addAlertAttachmentResponse
     }
 
     @Override
@@ -215,6 +228,10 @@ public class OpsGenieClientMock implements IOpsGenieClient {
 
     public List<Request> getExecutedRequests() {
         return requestProcessor.getExecutedRequests();
+    }
+
+    public List<Object> getExecutedRequestsV2() {
+        return requestProcessor.getExecutedRequestsV2();
     }
 
     @Override
